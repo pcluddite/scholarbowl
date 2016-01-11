@@ -1,4 +1,4 @@
-# Scholar Bowl scorekeeper
+# Scholar Bowl Scorekeeper
 Keeps statistics on players, teams and schools in a scholar bowl league.
 
 Features:
