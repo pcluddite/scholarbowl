@@ -81,10 +81,10 @@ namespace Scholar_Bowl {
         /// <param name="t">the team</param>
         /// <returns>true if the team played, false otherwise</returns>
         public bool DidPlay(Team t) {
-            if (t.Name.CompareTo(FirstTeam.Name) == 0) {
+            if (t.Name.Equals(FirstTeam.Name)) {
                 return true;
             }
-            else if (t.Name.CompareTo(SecondTeam.Name) == 0) {
+            else if (t.Name.Equals(SecondTeam.Name)) {
                 return true;
             }
             return false;
@@ -161,7 +161,7 @@ namespace Scholar_Bowl {
             decimal ret = 0;
             foreach (MatchTeam mt in GetTeamsAsList()) {
                 foreach (var p in mt.Players) {
-                    if (p.Name.CompareTo(player.Name) == 0) {
+                    if (p.Name.Equals(player.Name)) {
                         ret += p.Tossups;
                     }
                 }
@@ -178,7 +178,7 @@ namespace Scholar_Bowl {
             decimal ret = 0;
             foreach (MatchTeam mt in GetTeamsAsList()) {
                 foreach (var p in mt.Players) {
-                    if (p.Name.CompareTo(player.Name) == 0) {
+                    if (p.Name.Equals(player.Name)) {
                         ret += p.Duration;
                     }
                 }

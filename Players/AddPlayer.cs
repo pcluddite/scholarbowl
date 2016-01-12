@@ -24,7 +24,7 @@ namespace Scholar_Bowl {
 
         private void button1_Click(object sender, EventArgs e) {
             string player = textBox1.Text.Trim();
-            if (player.CompareTo("") == 0) {
+            if (player.Equals("")) {
                 toolTip1.ToolTipTitle = "Player Has No Name!";
                 toolTip1.Show("You cannot have a player without a name.", textBox1);
             }

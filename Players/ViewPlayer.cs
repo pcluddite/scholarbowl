@@ -95,7 +95,7 @@ namespace Scholar_Bowl {
 
         private void button2_Click(object sender, EventArgs e) {
             string playerName = textBox1.Text.Trim();
-            if (MainForm.Players.ContainsKey(playerName) && player.Name.CompareTo(playerName) != 0) {
+            if (MainForm.Players.ContainsKey(playerName) && !player.Name.Equals(playerName)) {
                 toolTip1.ToolTipTitle = "Player Already Exists!";
                 toolTip1.Show("You cannot have two players with the same name.", textBox1);
             }

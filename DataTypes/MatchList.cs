@@ -28,7 +28,7 @@ namespace Scholar_Bowl {
         public Match[] GetOnDate(DateTime dt) {
             List<Match> ret = new List<Match>();
             foreach (Match m in matches) {
-                if (m.Date.ToShortDateString().CompareTo(dt.ToShortDateString()) == 0) {
+                if (m.Date.ToShortDateString().Equals(dt.ToShortDateString())) {
                     ret.Add(m);
                 }
             }
@@ -197,8 +197,8 @@ namespace Scholar_Bowl {
         public decimal GetWins(Team t) {
             decimal ret = 0;
             foreach (Match m in matches) {
-                if (m.Winner.School.Name.CompareTo(t.School.Name) == 0 &&
-                    m.Winner.Name.CompareTo(t.Name) == 0) {
+                if (m.Winner.School.Name.Equals(t.School.Name) &&
+                    m.Winner.Name.Equals(t.Name)) {
                     ret++;
                 }
             }

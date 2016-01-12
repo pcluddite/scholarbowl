@@ -98,7 +98,7 @@ namespace Scholar_Bowl {
             }
 
             foreach(MatchPlayer mp in team.Players) {
-                if (playerSelect.SelectedItem.ToString().CompareTo(mp.Name) == 0) {
+                if (playerSelect.SelectedItem.ToString().Equals(mp.Name)) {
                     tossupBox.Text = mp.Tossups.ToString();
                     durBox.Text = mp.Duration.ToString();
                     addButton.Text = "Set Player";
@@ -179,12 +179,12 @@ namespace Scholar_Bowl {
                 toolTip1.Show("You have selected a player for these statistics to be applied.", playerSelect);
                 return;
             }
-            if (tossupBox.Text.CompareTo("") == 0) {
+            if (tossupBox.Text.Equals("")) {
                 toolTip1.ToolTipTitle = "No Tossups Entered!";
                 toolTip1.Show("You have not entered any tossups for this player.", tossupBox);
                 return;
             }
-            if (durBox.Text.CompareTo("") == 0) {
+            if (durBox.Text.Equals("")) {
                 toolTip1.ToolTipTitle = "No Durration Entered!";
                 toolTip1.Show("You have not entered the duration for which this player played.", durBox);
                 return;
@@ -208,7 +208,7 @@ namespace Scholar_Bowl {
                 player.Tossups = decimal.Parse(tossupBox.Text);
                 player.Duration = decimal.Parse(durBox.Text);
                 foreach (ListViewItem item in listView.Items) {
-                    if (item.Text.CompareTo(player.Name) == 0) {
+                    if (item.Text.Equals(player.Name)) {
                         item.SubItems[1].Text = player.Tossups.ToString();
                         item.SubItems[2].Text = player.Duration.ToString();
                     }
@@ -222,7 +222,7 @@ namespace Scholar_Bowl {
                 e.Handled = true;
             }
             if ((sender as TextBox).Size.Width == 53 &&
-                e.KeyChar.CompareTo('.') == 0 &&
+                e.KeyChar == '.' &&
                 (sender as TextBox).Text.IndexOf('.') == -1) {
                 e.Handled = false;
             }
@@ -233,13 +233,13 @@ namespace Scholar_Bowl {
         }
 
         private void button5_Click(object sender, EventArgs e) {
-            if (textBox5.Text.CompareTo("") == 0) {
+            if (textBox5.Text.Equals("")) {
                 toolTip1.ToolTipTitle = "No Final Score!";
                 toolTip1.Show("This team must have a final score.", textBox5);
                 textBox5.Focus();
                 return;
             }
-            if (textBox3.Text.CompareTo("") == 0) {
+            if (textBox3.Text.Equals("")) {
                 toolTip1.ToolTipTitle = "No Final Score!";
                 toolTip1.Show("This team must have a final score.", textBox3);
                 textBox3.Focus();

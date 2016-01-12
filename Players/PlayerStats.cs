@@ -141,7 +141,7 @@ namespace Scholar_Bowl {
         }
 
         private void button3_Click(object sender, EventArgs e) {
-            if (listView1.SelectedItems[0].SubItems[4].Text.CompareTo("0") != 0) {
+            if (!listView1.SelectedItems[0].SubItems[4].Text.Equals("0")) {
                 MessageBox.Show(this, "This player has already participated in some games and cannot be removed from the roster.",
                     this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }

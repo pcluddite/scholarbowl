@@ -96,7 +96,7 @@ namespace Scholar_Bowl {
             }
             listView1.Items.Clear();
             foreach (ListViewItem team in teams.Keys) {
-                if (team.SubItems[1].Text.CompareTo(comboBox1.SelectedItem.ToString()) == 0) {
+                if (team.SubItems[1].Text.Equals(comboBox1.SelectedItem.ToString())) {
                     listView1.Items.Add(team);
                 }
             }
@@ -108,9 +108,9 @@ namespace Scholar_Bowl {
             }
             listView1.Items.Clear();
             foreach (ListViewItem team in teams.Keys) {
-                if (team.SubItems[1].Text.CompareTo(comboBox1.SelectedItem.ToString()) == 0 && (
-                    team.SubItems[2].Text.CompareTo(comboBox2.SelectedItem.ToString()) == 0 ||
-                    comboBox2.SelectedItem.ToString().CompareTo("") == 0)) {
+                if (team.SubItems[1].Text.Equals(comboBox1.SelectedItem.ToString()) && (
+                    team.SubItems[2].Text.Equals(comboBox2.SelectedItem.ToString()) ||
+                    comboBox2.SelectedItem.ToString().Equals(""))) {
                     listView1.Items.Add(team);
                 }
             }

@@ -26,7 +26,7 @@ namespace Scholar_Bowl {
             XmlElement ret = doc.CreateElement("school");
             ret.SetAttribute("name", this.Name);
             foreach (var t in this.teams) {
-                if (t.Key.CompareTo("No Team") != 0) {
+                if (!t.Key.Equals("No Team")) {
                     XmlElement team = doc.CreateElement("team");
                     team.SetAttribute("name", t.Key);
                     ret.AppendChild(team);

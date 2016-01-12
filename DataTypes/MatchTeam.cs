@@ -36,7 +36,7 @@ namespace Scholar_Bowl
         public bool HasPlayer(string playerName)
         {
             foreach (MatchPlayer mp in this.Players) {
-                if (mp.Player.Name.CompareTo(playerName) == 0) {
+                if (mp.Player.Name.Equals(playerName)) {
                     return true;
                 }
             }
@@ -46,7 +46,7 @@ namespace Scholar_Bowl
         public MatchPlayer FindPlayer(string playerName)
         {
             foreach (MatchPlayer mp in this.Players) {
-                if (mp.Player.Name.CompareTo(playerName) == 0) {
+                if (mp.Player.Name.Equals(playerName)) {
                     return mp;
                 }
             }
@@ -65,7 +65,7 @@ namespace Scholar_Bowl
         {
             List<MatchPlayer> newPlayers = new List<MatchPlayer>();
             foreach (MatchPlayer mp in this.Players) {
-                if (mp.Name.CompareTo(playerName) != 0) {
+                if (!mp.Name.Equals(playerName)) {
                     newPlayers.Add(mp);
                 }
             }

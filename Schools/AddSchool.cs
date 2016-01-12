@@ -35,7 +35,7 @@ namespace Scholar_Bowl {
                 toolTip1.ToolTipTitle = "School Already Exists!";
                 toolTip1.Show("You cannot have two schools with the same name.", textBox1);
             }
-            else if (school.CompareTo("") == 0) {
+            else if (school.Equals("")) {
                 toolTip1.ToolTipTitle = "School Has No Name!";
                 toolTip1.Show("You must choose a name for the school.", textBox1);
             }

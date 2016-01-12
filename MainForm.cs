@@ -121,7 +121,7 @@ namespace Scholar_Bowl {
             }
 
             if ((sender as TextBox).Size.Width == 50 &&
-                e.KeyChar.CompareTo('.') == 0 &&
+                e.KeyChar == '.' &&
                 (sender as TextBox).Text.IndexOf('.') == -1) {
                 e.Handled = false;
             }
@@ -194,13 +194,13 @@ namespace Scholar_Bowl {
         #endregion
 
         private void button5_Click(object sender, EventArgs e) {
-            if (textBox1.Text.CompareTo("") == 0) {
+            if (textBox1.Text.Equals("")) {
                 toolTip1.ToolTipTitle = "No Score Has Been Entered!";
                 toolTip1.Show("You have not entered a final score for this team.", textBox1);
                 textBox1.Focus();
                 return;
             }
-            if (textBox2.Text.CompareTo("") == 0) {
+            if (textBox2.Text.Equals("")) {
                 toolTip1.ToolTipTitle = "No Score Has Been Entered!";
                 toolTip1.Show("You have not entered a final score for this team.", textBox2);
                 textBox2.Focus();

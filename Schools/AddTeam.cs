@@ -18,7 +18,7 @@ namespace Scholar_Bowl {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            if (textBox1.Text.Trim().CompareTo("") == 0) {
+            if (textBox1.Text.Trim().Equals("")) {
                 toolTip1.ToolTipTitle = "No Team Name!";
                 toolTip1.Show("You cannot add a team without a name.", textBox1);
             }
