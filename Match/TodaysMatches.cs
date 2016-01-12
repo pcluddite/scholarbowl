@@ -24,6 +24,7 @@ namespace Scholar_Bowl {
 
         void reload() {
             listView1.Items.Clear();
+            matches.Clear();
             comboBox1.Items.Clear();
             comboBox2.Items.Clear();
             comboBox3.Items.Clear();
