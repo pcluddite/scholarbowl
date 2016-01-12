@@ -79,7 +79,7 @@ namespace Scholar_Bowl {
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e) {
             List<Team> teams = null;
             Invoke(new MethodInvoker(delegate { teams = this.teams.Values.ToList(); }));
-            GenerateXL.AllTeams(teams);
+            ExcelGenerator.AllTeams(teams);
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {

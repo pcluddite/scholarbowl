@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Office.Interop.Excel;
 
 namespace Scholar_Bowl {
-    public class GenerateXL {
+    public class ExcelGenerator {
 
         public static void ThisPlayer(object o) {
             Player player = (Player)o;

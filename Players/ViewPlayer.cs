@@ -74,7 +74,7 @@ namespace Scholar_Bowl {
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e) {
             Player player = null;
             Invoke(new MethodInvoker(delegate { player = this.player; }));
-            GenerateXL.ThisPlayer(player);
+            ExcelGenerator.ThisPlayer(player);
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {

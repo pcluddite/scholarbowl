@@ -121,7 +121,7 @@ namespace Scholar_Bowl {
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e) {
             List<Player> players = null;
             Invoke(new MethodInvoker(delegate { players = MainForm.Players.Values.ToList(); }));
-            GenerateXL.AllPlayers(players);
+            ExcelGenerator.AllPlayers(players);
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
