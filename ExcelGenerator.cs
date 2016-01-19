@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.Office.Interop.Excel;
 
-namespace Scholar_Bowl {
-    public class ExcelGenerator {
+namespace Scholar_Bowl
+{
+    public class ExcelGenerator
+    {
+        public static void ThisPlayer(object o_player)
+        {
+            Player player = (Player)o_player;
 
-        public static void ThisPlayer(object o) {
-            Player player = (Player)o;
-
-            Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+            Application xlApp = new Application();
 
             Workbook wb = xlApp.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
             Worksheet ws = (Worksheet)wb.Worksheets[1];
@@ -167,10 +166,11 @@ namespace Scholar_Bowl {
 
         */
 
-        public static void AllPlayers(object o) {
-            List<Player> players = (List<Player>)o;
+        public static void AllPlayers(object o_player_list)
+        {
+            List<Player> players = (List<Player>)o_player_list;
 
-            Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+            Application xlApp = new Application();
 
             Workbook wb = xlApp.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
             Worksheet ws = (Worksheet)wb.Worksheets[1];
@@ -227,10 +227,11 @@ namespace Scholar_Bowl {
             xlApp.Visible = true;
         }
 
-        public static void AllTeams(object o) {
-            List<Team> teams = (List<Team>)o;
+        public static void AllTeams(object o_team_list)
+        {
+            List<Team> teams = (List<Team>)o_team_list;
 
-            Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+            Application xlApp = new Application();
 
             Workbook wb = xlApp.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
             Worksheet ws = (Worksheet)wb.Worksheets[1];

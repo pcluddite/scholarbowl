@@ -289,16 +289,14 @@ namespace Scholar_Bowl {
             else {
                 doc.LoadXml("<scholarbowl><schools></schools><scholars></scholars><matches></matches></scholarbowl>");
             }
-            Dictionary<string,School> schools = School.FromXmlNode(doc);
-            Dictionary<string, Player> players = Player.FromXmlNode(doc, schools);
-            MatchList.AllMatches = MatchList.FromXml(doc, schools, players);
+            Schools = School.FromXmlNode(doc);
+            Players = Player.FromXmlNode(doc, Schools);
+            MatchList.AllMatches = MatchList.FromXml(doc, Schools, Players);
 
             PlayerControlList listView1 = new PlayerControlList(groupBox1);
             PlayerControlList listView2 = new PlayerControlList(groupBox2);
 
             BeginInvoke(new MethodInvoker(delegate {
-                Schools = schools;
-                Players = players;
                 playerList1 = listView1;
                 playerList2 = listView2;
                 reload();

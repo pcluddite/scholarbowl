@@ -60,7 +60,7 @@
     <Compile Include="Schools\Edit School.Designer.cs">
       <DependentUpon>Edit School.cs</DependentUpon>
     </Compile>
-    <Compile Include="GenerateXL.cs" />
+    <Compile Include="ExcelGenerator.cs" />
     <Compile Include="Match\MatchEditor.cs">
       <SubType>Form</SubType>
     </Compile>
