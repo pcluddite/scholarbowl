@@ -25,14 +25,12 @@ namespace Scholar_Bowl {
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public Match[] GetOnDate(DateTime dt) {
-            List<Match> ret = new List<Match>();
+        public IEnumerable<Match> GetOnDate(DateTime dt) {
             foreach (Match m in matches) {
-                if (m.Date.ToShortDateString().Equals(dt.ToShortDateString())) {
-                    ret.Add(m);
+                if (m.Date.Date == dt.Date.Date) {
+                    yield return m;
                 }
             }
-            return ret.ToArray();
         }
 
 
@@ -94,8 +92,7 @@ namespace Scholar_Bowl {
         /// <returns></returns>
         public decimal GetTossupsOnDate(DateTime dt, Player p) {
             decimal ret = 0;
-            Match[] matches = GetOnDate(dt);
-            foreach (Match m in matches) {
+            foreach (Match m in GetOnDate(dt)) {
                 ret += m.GetTossups(p);
             }
             return ret;
