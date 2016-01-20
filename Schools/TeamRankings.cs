@@ -40,9 +40,9 @@ namespace Scholar_Bowl {
             decimal lastAvg = -2;
             decimal lastGames = -2;
             foreach (Team t in rankedTeams) {
-                decimal avg = MatchList.AllMatches.GetAverageWins(t);
-                decimal wins = MatchList.AllMatches.GetWins(t);
-                decimal losses = MatchList.AllMatches.GetLosses(t);
+                decimal avg = MainForm.AllMatches.GetAverageWins(t);
+                decimal wins = MainForm.AllMatches.GetWins(t);
+                decimal losses = MainForm.AllMatches.GetLosses(t);
                 decimal games = wins + losses;
                 if (avg != lastAvg) {
                     rank++;
@@ -126,7 +126,7 @@ namespace Scholar_Bowl {
                  MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes) {
                 foreach (var t in teams) {
                     if (t.Key == listView1.SelectedItems[0]) {
-                        if (MatchList.AllMatches.GetGamesPlayed(t.Value) == 0) {
+                        if (MainForm.AllMatches.GetGamesPlayed(t.Value) == 0) {
                             t.Value.School.Teams.Remove(t.Value.Name);
                             if (t.Value.School.Teams.Count == 1 &&
                                 MessageBox.Show(this, "The team has been removed, but this is the last team in the school. Do you want to remove the school completely?",

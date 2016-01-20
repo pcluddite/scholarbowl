@@ -1,19 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
 
-namespace Scholar_Bowl {
-    public partial class MainForm : Form {
-
+namespace Scholar_Bowl
+{
+    public partial class MainForm : Form
+    {
+        /// <summary>
+        /// All schools in the league
+        /// </summary>
         public static Dictionary<string, School> Schools { get; set; }
+        /// <summary>
+        /// All players in the league
+        /// </summary>
         public static Dictionary<string, Player> Players { get; set; }
+        /// <summary>
+        /// All matches played in the league
+        /// </summary>
+        public static MatchList AllMatches { get; set; }
 
         public PlayerControlList playerList1;
         public PlayerControlList playerList2;
@@ -22,12 +29,14 @@ namespace Scholar_Bowl {
 
         private Splash splash;
 
-        public MainForm() {
+        public MainForm()
+        {
             InitializeComponent();
         }
 
         #region Save/Load
-        private void Form1_Load(object sender, EventArgs e) {
+        private void Form1_Load(object sender, EventArgs e)
+        {
             splash = new Splash();
             splash.Show();
             backgroundWorker1.RunWorkerAsync();
@@ -51,6 +60,38 @@ namespace Scholar_Bowl {
             reload();*/
         }
 
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            XmlDocument doc = new XmlDocument();
+            if (File.Exists(Application.StartupPath + "\\scholarbowl.dat")) {
+                File.Move(Application.StartupPath + "\\scholarbowl.dat",
+                    Application.StartupPath + "\\Statistics.xml");
+            }
+            if (File.Exists(Application.StartupPath + "\\Statistics.xml")) {
+                doc.Load(Application.StartupPath + "\\Statistics.xml");
+            }
+            else {
+                doc.LoadXml("<scholarbowl><schools></schools><scholars></scholars><matches></matches></scholarbowl>");
+            }
+            Schools = School.FromXmlNode(doc);
+            Players = Player.FromXmlNode(doc, Schools);
+            AllMatches = MatchList.FromXml(doc, Schools, Players);
+
+            PlayerControlList listView1 = new PlayerControlList(groupBox1);
+            PlayerControlList listView2 = new PlayerControlList(groupBox2);
+
+            BeginInvoke(new MethodInvoker(delegate {
+                playerList1 = listView1;
+                playerList2 = listView2;
+                reload();
+            }));
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            splash.Close();
+        }
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
             try {
                 XmlDocument doc = new XmlDocument();
@@ -64,7 +105,7 @@ namespace Scholar_Bowl {
                     scholars.AppendChild(p.Value.ToXmlNode(doc));
                 }
                 XmlNode nmatches = doc.SelectSingleNode("scholarbowl/matches");
-                foreach (var m in MatchList.AllMatches) {
+                foreach (var m in AllMatches) {
                     nmatches.AppendChild(m.ToXmlNode(doc));
                 }
                 doc.Save(Application.StartupPath + "\\Statistics.xml");
@@ -76,7 +117,8 @@ namespace Scholar_Bowl {
             }
         }
 
-        void reload() {
+        void reload()
+        {
             comboBox1.Items.Clear();
             comboBox2.Items.Clear();
             comboBox3.Items.Clear();
@@ -91,7 +133,8 @@ namespace Scholar_Bowl {
             }
         }
 
-        void populate(GroupBox groupBox) {
+        void populate(GroupBox groupBox)
+        {
             Team team;
 
             if (groupBox == groupBox1) {
@@ -109,6 +152,7 @@ namespace Scholar_Bowl {
                 playerList2.AddPlayers(playersInTeam);
             }
         }
+
         #endregion
 
         #region Format Check
@@ -238,7 +282,7 @@ namespace Scholar_Bowl {
             MatchTeam team2 = new MatchTeam(Schools[comboBox4.SelectedItem.ToString()]
                 .Teams[comboBox3.SelectedItem.ToString()], score2, team2Players.ToArray());
 
-            MatchList.AllMatches.AddMatch(dateTimePicker1.Value, team1, team2);
+            AllMatches.AddMatch(dateTimePicker1.Value, team1, team2);
 
             label12.Show();
             timer1.Start();
@@ -275,36 +319,6 @@ namespace Scholar_Bowl {
         private void timer1_Tick(object sender, EventArgs e) {
             label12.Hide();
             timer1.Stop();
-        }
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e) {
-            XmlDocument doc = new XmlDocument();
-            if (File.Exists(Application.StartupPath + "\\scholarbowl.dat")) {
-                File.Move(Application.StartupPath + "\\scholarbowl.dat",
-                    Application.StartupPath + "\\Statistics.xml");
-            }
-            if (File.Exists(Application.StartupPath + "\\Statistics.xml")) {
-                doc.Load(Application.StartupPath + "\\Statistics.xml");
-            }
-            else {
-                doc.LoadXml("<scholarbowl><schools></schools><scholars></scholars><matches></matches></scholarbowl>");
-            }
-            Schools = School.FromXmlNode(doc);
-            Players = Player.FromXmlNode(doc, Schools);
-            MatchList.AllMatches = MatchList.FromXml(doc, Schools, Players);
-
-            PlayerControlList listView1 = new PlayerControlList(groupBox1);
-            PlayerControlList listView2 = new PlayerControlList(groupBox2);
-
-            BeginInvoke(new MethodInvoker(delegate {
-                playerList1 = listView1;
-                playerList2 = listView2;
-                reload();
-            }));
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
-            splash.Close();
         }
 
         private void viewRankingsToolStripMenuItem_Click(object sender, EventArgs e) {

@@ -20,10 +20,10 @@ namespace Scholar_Bowl
         /// <returns></returns>
         public int CompareTo(Team other)
         {
-            decimal avg1 = MatchList.AllMatches.GetAverageWins(this);
-            decimal wins1 = MatchList.AllMatches.GetWins(this);
-            decimal avg2 = MatchList.AllMatches.GetAverageWins(other);
-            decimal wins2 = MatchList.AllMatches.GetWins(other);
+            decimal avg1 = MainForm.AllMatches.GetAverageWins(this);
+            decimal wins1 = MainForm.AllMatches.GetWins(this);
+            decimal avg2 = MainForm.AllMatches.GetAverageWins(other);
+            decimal wins2 = MainForm.AllMatches.GetWins(other);
 
             if (wins1 == wins2) {
                 if (avg1 > avg2) {

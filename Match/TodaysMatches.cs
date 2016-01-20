@@ -33,12 +33,12 @@ namespace Scholar_Bowl {
             comboBox2.Items.Add("");
             comboBox3.Items.Add("");
             comboBox4.Items.Add("");
-            MatchList.AllMatches.Sort((a, b) => b.Date.CompareTo(a.Date));
-            dateTimePicker2.Value = MatchList.AllMatches.GetFirstDate();
-            dateTimePicker1.Value = MatchList.AllMatches.GetLastDate();
+            MainForm.AllMatches.Sort((a, b) => b.Date.CompareTo(a.Date));
+            dateTimePicker2.Value = MainForm.AllMatches.GetFirstDate();
+            dateTimePicker1.Value = MainForm.AllMatches.GetLastDate();
             comboBox1.Items.AddRange(MainForm.Schools.Keys.ToArray());
             comboBox4.Items.AddRange(MainForm.Schools.Keys.ToArray());
-            foreach (Match m in MatchList.AllMatches) {
+            foreach (Match m in MainForm.AllMatches) {
                 addMatchToList(m);
             }
         }
@@ -158,7 +158,7 @@ namespace Scholar_Bowl {
                 "Are you sure you want to remove this match?\r\n(THIS CANNOT BE UNDONE!)", this.Text,
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes) {
                     Match matchToRemove = matches[listView1.SelectedItems[0]];
-                    MatchList.AllMatches.RemoveMatch(matchToRemove);
+                    MainForm.AllMatches.RemoveMatch(matchToRemove);
                     matches.Remove(listView1.SelectedItems[0]);
                     reloadListBox();
             }

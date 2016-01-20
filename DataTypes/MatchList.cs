@@ -9,10 +9,6 @@ namespace Scholar_Bowl {
     /// Represents a list of matches
     /// </summary>
     public class MatchList : ICollection<Match> {
-        /// <summary>
-        /// All matches played in the league
-        /// </summary>
-        public static MatchList AllMatches { get; set; }
 
         private List<Match> matches;
 

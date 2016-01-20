@@ -25,7 +25,7 @@ namespace Scholar_Bowl
             ws.Cells[1, 4] = "Average per game";
 
             int r = 2;
-            foreach (var v in MatchList.AllMatches.GetForEachDate(player)) {
+            foreach (var v in MainForm.AllMatches.GetForEachDate(player)) {
                 ws.Cells[r, 1] = v.Key;
                 ws.Cells[r, 2] = v.Value[0];
                 ws.Cells[r, 3] = v.Value[1];
@@ -192,8 +192,8 @@ namespace Scholar_Bowl
             decimal lastAvg = -2;
             decimal lastGames = -2;
             foreach (Player p in players) {
-                decimal avg = MatchList.AllMatches.GetAverage(p);
-                decimal games = MatchList.AllMatches.GetGamesPlayed(p);
+                decimal avg = MainForm.AllMatches.GetAverage(p);
+                decimal games = MainForm.AllMatches.GetGamesPlayed(p);
                 if (avg != lastAvg) {
                     rank++;
                 }
@@ -205,7 +205,7 @@ namespace Scholar_Bowl
                 ws.Cells[r, 1] = rank;
                 ws.Cells[r, 2] = p.Name;
                 ws.Cells[r, 3] = p.Team.School.Name + " - " + p.Team.Name;
-                decimal tossups = MatchList.AllMatches.GetTotalTossups(p);
+                decimal tossups = MainForm.AllMatches.GetTotalTossups(p);
                 ws.Cells[r, 4] = tossups;
                 ws.Cells[r, 5] = games;
                 if (games > 0) {
@@ -253,9 +253,9 @@ namespace Scholar_Bowl
             decimal lastAvg = -2;
             decimal lastGames = -2;
             foreach (Team t in teams) {
-                decimal avg = MatchList.AllMatches.GetAverageWins(t);
-                decimal wins = MatchList.AllMatches.GetWins(t);
-                decimal losses = MatchList.AllMatches.GetLosses(t);
+                decimal avg = MainForm.AllMatches.GetAverageWins(t);
+                decimal wins = MainForm.AllMatches.GetWins(t);
+                decimal losses = MainForm.AllMatches.GetLosses(t);
                 decimal games = wins + losses;
                 if (avg != lastAvg) {
                     rank++;

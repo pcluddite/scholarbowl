@@ -25,9 +25,9 @@ namespace Scholar_Bowl {
             textBox8.Text = player.Team.School.Name;
             comboBox2.Items.AddRange(player.Team.School.Teams.Keys.ToArray());
             comboBox2.SelectedItem = player.Team.Name;
-            textBox2.Text = MatchList.AllMatches.GetTotalTossups(player).ToString();
-            textBox3.Text = MatchList.AllMatches.GetGamesPlayed(player).ToString();
-            decimal avg = MatchList.AllMatches.GetAverage(player);
+            textBox2.Text = MainForm.AllMatches.GetTotalTossups(player).ToString();
+            textBox3.Text = MainForm.AllMatches.GetGamesPlayed(player).ToString();
+            decimal avg = MainForm.AllMatches.GetAverage(player);
             if (avg > -1) {
                 textBox4.Text = avg.ToString("#.###").PadLeft(1, '0');
             }
@@ -35,7 +35,7 @@ namespace Scholar_Bowl {
                 textBox4.Text = "--";
             }
             decimal wins = 0, losses = 0;
-            foreach (Match match in MatchList.AllMatches.GetMatches(player)) {
+            foreach (Match match in MainForm.AllMatches.GetMatches(player)) {
                 MatchPlayer mPlayer = match.GetPlayer(player);
                 MatchTeam opponent = match.GetOppenent(player);
                 string result;

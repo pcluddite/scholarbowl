@@ -32,8 +32,8 @@ namespace Scholar_Bowl {
             decimal lastAvg = -2;
             decimal lastGames = -2;
             foreach (Player p in rankedPlayers) {
-                decimal avg = MatchList.AllMatches.GetAverage(p);
-                decimal games = MatchList.AllMatches.GetGamesPlayed(p);
+                decimal avg = MainForm.AllMatches.GetAverage(p);
+                decimal games = MainForm.AllMatches.GetGamesPlayed(p);
                 if (avg != lastAvg) {
                     rank++;
                 }
@@ -45,7 +45,7 @@ namespace Scholar_Bowl {
                 ListViewItem item = new ListViewItem(rank.ToString());
                 item.SubItems.Add(p.Name);
                 item.SubItems.Add(p.Team.School.Name + " - " + p.Team.Name);
-                item.SubItems.Add(MatchList.AllMatches.GetTotalTossups(p).ToString());
+                item.SubItems.Add(MainForm.AllMatches.GetTotalTossups(p).ToString());
                 item.SubItems.Add(games.ToString());
                 if (avg > -1) {
                     item.SubItems.Add(avg.ToString("0.###").PadLeft(1, '0'));

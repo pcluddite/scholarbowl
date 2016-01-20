@@ -253,13 +253,13 @@ namespace Scholar_Bowl {
                 textBox5.Focus();
                 return;
             }
-            MatchList.AllMatches.RemoveMatch(oldMatch);
+            MainForm.AllMatches.RemoveMatch(oldMatch);
             this.thisMatch.FirstTeam.Score = score1;
             this.thisMatch.SecondTeam.Score = score2;
             this.thisMatch.FirstTeam.Team = this.thisMatch.FirstTeam.School.Teams[this.comboBox1.SelectedItem.ToString()];
             this.thisMatch.SecondTeam.Team = this.thisMatch.SecondTeam.School.Teams[this.comboBox2.SelectedItem.ToString()];
             this.thisMatch.Date = dateTimePicker1.Value;
-            MatchList.AllMatches.Add(thisMatch);
+            MainForm.AllMatches.Add(thisMatch);
             this.Close();
         }
     }

@@ -34,10 +34,10 @@ namespace Scholar_Bowl {
         /// <param name="p"></param>
         /// <returns></returns>
         public int CompareTo(Player p) {
-            decimal t1 = MatchList.AllMatches.GetTotalTossups(this);
-            decimal g1 = MatchList.AllMatches.GetGamesPlayed(this);
-            decimal t2 = MatchList.AllMatches.GetTotalTossups(p);
-            decimal g2 = MatchList.AllMatches.GetGamesPlayed(p);
+            decimal t1 = MainForm.AllMatches.GetTotalTossups(this);
+            decimal g1 = MainForm.AllMatches.GetGamesPlayed(this);
+            decimal t2 = MainForm.AllMatches.GetTotalTossups(p);
+            decimal g2 = MainForm.AllMatches.GetGamesPlayed(p);
 
             decimal avg1 = (g1 == 0) ? -1 : t1 / g1;
             decimal avg2 = (g2 == 0) ? -1 : t2 / g2;

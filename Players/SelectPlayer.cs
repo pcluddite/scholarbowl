@@ -60,8 +60,8 @@ namespace Scholar_Bowl {
 
         void addListView(Player p) {
             ListViewItem item = new ListViewItem(p.Name);
-            item.SubItems.Add(MatchList.AllMatches.GetTotalTossups(p).ToString());
-            item.SubItems.Add(MatchList.AllMatches.GetGamesPlayed(p).ToString());
+            item.SubItems.Add(MainForm.AllMatches.GetTotalTossups(p).ToString());
+            item.SubItems.Add(MainForm.AllMatches.GetGamesPlayed(p).ToString());
             listView1.Items.Add(item);
         }
 
