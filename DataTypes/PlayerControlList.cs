@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace Scholar_Bowl {
+namespace Scholar_Bowl
+{
     public class PlayerControlList {
         public List<PlayerControl> Items { get { return items; } }
 

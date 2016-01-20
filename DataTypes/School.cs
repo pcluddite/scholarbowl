@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Xml;
 
-namespace Scholar_Bowl {
+namespace Scholar_Bowl
+{
     /// <summary>
     /// Represents a school
     /// </summary>

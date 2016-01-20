@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
-namespace Scholar_Bowl {
+namespace Scholar_Bowl
+{
     public partial class TodaysMatches : Form {
 
-        MainForm main;
-        Dictionary<ListViewItem, Match> matches = new Dictionary<ListViewItem, Match>();
+        private Dictionary<ListViewItem, Match> matches = new Dictionary<ListViewItem, Match>();
 
         public TodaysMatches(MainForm main) {
-            this.main = main;
             InitializeComponent();
         }
 
@@ -62,7 +57,7 @@ namespace Scholar_Bowl {
 
         private void listView1_DoubleClick(object sender, EventArgs e) {
             if (listView1.SelectedItems.Count == 1) {
-                MatchEditor me = new MatchEditor(this.main, matches[listView1.SelectedItems[0]], MainForm.Players.Values.ToArray());
+                MatchEditor me = new MatchEditor(matches[listView1.SelectedItems[0]], MainForm.Players.Values.ToArray());
                 me.ShowDialog(this);
                 reload();
             }

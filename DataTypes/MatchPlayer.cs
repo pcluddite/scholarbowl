@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Scholar_Bowl
+﻿namespace Scholar_Bowl
 {
     /// <summary>
     /// Represents match information for a given player

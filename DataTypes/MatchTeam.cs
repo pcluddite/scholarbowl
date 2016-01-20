@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Scholar_Bowl
 {
@@ -10,10 +7,25 @@ namespace Scholar_Bowl
     /// </summary>
     public class MatchTeam
     {
+        /// <summary>
+        /// Gets the name of this team
+        /// </summary>
         public string Name { get { return this.Team.Name; } }
+        /// <summary>
+        /// Gets the school this team is a member of
+        /// </summary>
         public School School { get { return this.Team.School; } }
+        /// <summary>
+        /// Gets this team's final score for this match
+        /// </summary>
         public decimal Score { get; set; }
+        /// <summary>
+        /// Gets the team
+        /// </summary>
         public Team Team { get; set; }
+        /// <summary>
+        /// Gets the players who played in this match
+        /// </summary>
         public MatchPlayer[] Players { get; set; }
 
         public MatchTeam(Team t, decimal s, MatchPlayer[] players)

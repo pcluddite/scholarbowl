@@ -80,7 +80,8 @@ namespace Scholar_Bowl
             PlayerControlList listView1 = new PlayerControlList(groupBox1);
             PlayerControlList listView2 = new PlayerControlList(groupBox2);
 
-            BeginInvoke(new MethodInvoker(delegate {
+            BeginInvoke(new MethodInvoker(delegate
+            {
                 playerList1 = listView1;
                 playerList2 = listView2;
                 reload();
@@ -92,7 +93,8 @@ namespace Scholar_Bowl
             splash.Close();
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
             try {
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml("<scholarbowl><schools></schools><scholars></scholars><matches></matches></scholarbowl>");
@@ -157,7 +159,8 @@ namespace Scholar_Bowl
 
         #region Format Check
 
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e) {
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
             TextBox textBox = (TextBox)sender;
             if (!char.IsControl(e.KeyChar) &&
                 !char.IsDigit(e.KeyChar)) {
@@ -171,7 +174,8 @@ namespace Scholar_Bowl
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
             if (comboBox1.SelectedIndex > -1) {
                 comboBox2.Items.Clear();
                 foreach (var v in Schools[comboBox1.SelectedItem.ToString()].Teams) {
@@ -181,7 +185,8 @@ namespace Scholar_Bowl
             groupBox1.Enabled = playerList1.Enabled = false;
         }
 
-        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e) {
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
             if (comboBox4.SelectedIndex > -1) {
                 comboBox3.Items.Clear();
                 foreach (var v in Schools[comboBox4.SelectedItem.ToString()].Teams) {
@@ -191,7 +196,8 @@ namespace Scholar_Bowl
             groupBox2.Enabled = playerList2.Enabled = false;
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e) {
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
             ComboBox comboBox = (ComboBox)sender;
             if (comboBox.SelectedIndex == -1) {
                 return;
@@ -212,7 +218,8 @@ namespace Scholar_Bowl
             }
         }
 
-        private void textBox35_Click(object sender, EventArgs e) {
+        private void textBox35_Click(object sender, EventArgs e)
+        {
             TextBox textBox = (TextBox)sender;
             ComboBox schoolSelect;
             ComboBox teamSelect;
@@ -237,7 +244,8 @@ namespace Scholar_Bowl
 
         #endregion
 
-        private void button5_Click(object sender, EventArgs e) {
+        private void button5_Click(object sender, EventArgs e)
+        {
             if (textBox1.Text.Equals("")) {
                 toolTip1.ToolTipTitle = "No Score Has Been Entered!";
                 toolTip1.Show("You have not entered a final score for this team.", textBox1);
@@ -259,7 +267,7 @@ namespace Scholar_Bowl
                 return;
             }
             List<MatchPlayer> team1Players = new List<MatchPlayer>();
-            foreach(PlayerControl p in playerList1.Items) {
+            foreach (PlayerControl p in playerList1.Items) {
                 if (!p.IsEmpty) {
                     if (!p.CheckInfo(toolTip1)) {
                         return;
@@ -289,44 +297,52 @@ namespace Scholar_Bowl
             reload();
         }
 
-        private void setupNewPlayerToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void setupNewPlayerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             AddPlayer ap = new AddPlayer(this);
             ap.ShowDialog(this);
         }
 
-        private void setupNewSchoolToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void setupNewSchoolToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             AddSchool addschool = new AddSchool(this);
             addschool.ShowDialog(this);
             reload();
         }
 
-        private void viewIndividualStatisticsToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void viewIndividualStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             PlayerStats ps = new PlayerStats(this);
             ps.ShowDialog(this);
             comboBox2_SelectedIndexChanged(comboBox2, e);
             comboBox2_SelectedIndexChanged(comboBox3, e);
         }
 
-        private void allMatchesToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void allMatchesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             TodaysMatches tm = new TodaysMatches(this);
             tm.ShowDialog(this);
         }
 
-        private void label12_Click(object sender, EventArgs e) {
+        private void label12_Click(object sender, EventArgs e)
+        {
             label12.Hide();
         }
 
-        private void timer1_Tick(object sender, EventArgs e) {
+        private void timer1_Tick(object sender, EventArgs e)
+        {
             label12.Hide();
             timer1.Stop();
         }
 
-        private void viewRankingsToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void viewRankingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             TeamRankings tr = new TeamRankings(this);
             tr.ShowDialog(this);
         }
 
-        private void textBox5_KeyDown(object sender, KeyEventArgs e) {
+        private void textBox5_KeyDown(object sender, KeyEventArgs e)
+        {
             TextBox textBox = (TextBox)sender;
             if (e.KeyCode == Keys.Down) {
                 PlayerControl control;

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System.Drawing;
 
-namespace Scholar_Bowl {
+namespace Scholar_Bowl
+{
     public class PlayerControl {
 
         public decimal Tossups {
