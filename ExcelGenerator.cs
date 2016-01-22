@@ -5,10 +5,8 @@ namespace Scholar_Bowl
 {
     public class ExcelGenerator
     {
-        public static void ThisPlayer(object o_player)
+        public static void ThisPlayer(Player player)
         {
-            Player player = (Player)o_player;
-
             Application xlApp = new Application();
 
             Workbook wb = xlApp.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);

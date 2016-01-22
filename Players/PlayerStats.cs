@@ -108,9 +108,7 @@ namespace Scholar_Bowl
 
         private void listView1_DoubleClick(object sender, EventArgs e) {
             if (listView1.SelectedItems.Count == 1) {
-                ViewPlayer vp = new ViewPlayer(
-                    MainForm.Players[listView1.SelectedItems[0].SubItems[1].Text],
-                    main);
+                ViewPlayer vp = new ViewPlayer(MainForm.Players[listView1.SelectedItems[0].SubItems[1].Text]);
                 vp.ShowDialog(this);
                 reload();
             }
