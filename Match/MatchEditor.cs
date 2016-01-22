@@ -4,72 +4,80 @@ using System.Windows.Forms;
 
 namespace Scholar_Bowl
 {
-    public partial class MatchEditor : Form {
-        
+    public partial class MatchEditor : Form
+    {
+
         Match thisMatch;
         Player[] players;
         Match oldMatch;
 
-        public MatchEditor(Match m, Player[] playerList) {
+        public MatchEditor(Match m, Player[] playerList)
+        {
             this.oldMatch = m;
             this.thisMatch = m.Clone();
             this.players = playerList;
             InitializeComponent();
         }
 
-        private void MatchEditor_Load(object sender, EventArgs e) {
+        private void MatchEditor_Load(object sender, EventArgs e)
+        {
             #region Load Team 1
-            textBox5.Text = thisMatch.FirstTeam.Score.ToString();
-            textBox7.Text = thisMatch.FirstTeam.School.Name;
-            comboBox1.Items.AddRange(thisMatch.FirstTeam.School.Teams.Keys.ToArray());
-            comboBox1.SelectedItem = thisMatch.FirstTeam.Team.Name;
+            scoreBox1.Text = thisMatch.FirstTeam.Score.ToString();
+            schoolBox1.Text = thisMatch.FirstTeam.School.Name;
+            teamBox1.Items.AddRange(thisMatch.FirstTeam.School.Teams.Keys.ToArray());
+            teamBox1.SelectedItem = thisMatch.FirstTeam.Team.Name;
             foreach (MatchPlayer player in thisMatch.FirstTeam.Players) {
                 ListViewItem item = new ListViewItem();
                 item.Text = player.Name;
                 item.SubItems.Add(player.Tossups.ToString());
                 item.SubItems.Add(player.Duration.ToString());
-                listView1.Items.Add(item);
+                playerListView1.Items.Add(item);
             }
             #endregion
 
             #region Load Team 2
-            textBox3.Text = thisMatch.SecondTeam.Score.ToString();
-            textBox8.Text = thisMatch.SecondTeam.School.Name;
-            comboBox2.Items.AddRange(thisMatch.SecondTeam.School.Teams.Keys.ToArray());
-            comboBox2.SelectedItem = thisMatch.SecondTeam.Team.Name;
+            scoreBox2.Text = thisMatch.SecondTeam.Score.ToString();
+            schoolBox2.Text = thisMatch.SecondTeam.School.Name;
+            teamBox2.Items.AddRange(thisMatch.SecondTeam.School.Teams.Keys.ToArray());
+            teamBox2.SelectedItem = thisMatch.SecondTeam.Team.Name;
             foreach (MatchPlayer player in thisMatch.SecondTeam.Players) {
                 ListViewItem item = new ListViewItem();
                 item.Text = player.Name;
                 item.SubItems.Add(player.Tossups.ToString());
                 item.SubItems.Add(player.Duration.ToString());
-                listView2.Items.Add(item);
+                playerListView2.Items.Add(item);
             }
             #endregion
 
             foreach (Player player in thisMatch.FirstTeam.School.GetPlayers(players)) {
-                comboBox3.Items.Add(player.Name);
+                playerBox1.Items.Add(player.Name);
             }
             foreach (Player player in thisMatch.SecondTeam.School.GetPlayers(players)) {
-                comboBox4.Items.Add(player.Name);
+                playerBox2.Items.Add(player.Name);
             }
-            this.dateTimePicker1.Value = thisMatch.Date;
+            this.matchDatePicker.Value = thisMatch.Date;
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e) {
-            ListView listView = (ListView)sender;
-            if (listView == listView1 && listView1.SelectedItems.Count == 1) {
-                comboBox3.SelectedItem = listView1.SelectedItems[0].Text;
-                textBox1.Text = listView1.SelectedItems[0].SubItems[1].Text;
-                textBox2.Text = listView1.SelectedItems[0].SubItems[2].Text;
-            }
-            else if (listView == listView2 && listView2.SelectedItems.Count == 1) {
-                comboBox4.SelectedItem = listView2.SelectedItems[0].Text;
-                textBox6.Text = listView2.SelectedItems[0].SubItems[1].Text;
-                textBox4.Text = listView2.SelectedItems[0].SubItems[2].Text;
+        private void playerListView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (playerListView1.SelectedItems.Count == 1) {
+                playerBox1.SelectedItem = playerListView1.SelectedItems[0].Text;
+                tossupBox1.Text = playerListView1.SelectedItems[0].SubItems[1].Text;
+                durationBox1.Text = playerListView1.SelectedItems[0].SubItems[2].Text;
             }
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e) {
+        private void playerListView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (playerListView2.SelectedItems.Count == 1) {
+                playerBox2.SelectedItem = playerListView2.SelectedItems[0].Text;
+                tossupBox2.Text = playerListView2.SelectedItems[0].SubItems[1].Text;
+                durationBox2.Text = playerListView2.SelectedItems[0].SubItems[2].Text;
+            }
+        }
+
+        private void playerBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
             ComboBox playerSelect = (ComboBox)sender;
             TextBox tossupBox;
             TextBox durBox;
@@ -77,22 +85,22 @@ namespace Scholar_Bowl
             Button removeButton;
             MatchTeam team;
 
-            if (playerSelect == comboBox3) {
-                tossupBox = textBox1;
-                durBox = textBox2;
-                addButton = button1;
-                removeButton = button2;
+            if (playerSelect == playerBox1) {
+                tossupBox = tossupBox1;
+                durBox = durationBox1;
+                addButton = addPlayerButton1;
+                removeButton = removePlayerButton1;
                 team = this.thisMatch.FirstTeam;
             }
             else {
-                tossupBox = textBox6;
-                durBox = textBox4;
-                addButton = button4;
-                removeButton = button3;
+                tossupBox = tossupBox2;
+                durBox = durationBox2;
+                addButton = addPlayerButton2;
+                removeButton = removePlayerButton2;
                 team = this.thisMatch.SecondTeam;
             }
 
-            foreach(MatchPlayer mp in team.Players) {
+            foreach (MatchPlayer mp in team.Players) {
                 if (playerSelect.SelectedItem.ToString().Equals(mp.Name)) {
                     tossupBox.Text = mp.Tossups.ToString();
                     durBox.Text = mp.Duration.ToString();
@@ -107,29 +115,30 @@ namespace Scholar_Bowl
             removeButton.Enabled = false;
         }
 
-        private void button2_Click(object sender, EventArgs e) {
+        private void removePlayerButton_Click(object sender, EventArgs e)
+        {
             ListView listView;
             ComboBox comboBox;
             Button addButton;
             Button delButton;
             MatchTeam team;
-            if ((delButton = button2) == (Button)sender) {
-                addButton = button1;
-                listView = listView1;
-                comboBox = comboBox3;
+            if ((delButton = removePlayerButton1) == (Button)sender) {
+                addButton = addPlayerButton1;
+                listView = playerListView1;
+                comboBox = playerBox1;
                 team = this.thisMatch.FirstTeam;
             }
             else {
-                delButton = button3;
-                addButton = button4;
-                listView = listView2;
-                comboBox = comboBox4;
+                delButton = removePlayerButton2;
+                addButton = addPlayerButton2;
+                listView = playerListView2;
+                comboBox = playerBox2;
                 team = this.thisMatch.SecondTeam;
             }
 
             if (comboBox.SelectedIndex > -1 && MessageBox.Show(this,
                 "Are you sure you want to remove this player?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) ==
-                System.Windows.Forms.DialogResult.Yes) {
+                DialogResult.Yes) {
                 team.RemovePlayer(comboBox.SelectedItem.ToString());
                 listView.Items.Clear();
                 foreach (MatchPlayer player in team.Players) {
@@ -144,7 +153,8 @@ namespace Scholar_Bowl
             }
         }
 
-        private void button1_Click(object sender, EventArgs e) {
+        private void addPlayerButton_Click(object sender, EventArgs e)
+        {
             Button addButton = (Button)sender;
             ComboBox playerSelect;
             TextBox tossupBox;
@@ -152,21 +162,21 @@ namespace Scholar_Bowl
             ListView listView;
             Button removeButton;
             MatchTeam team;
-            if (addButton == button1) {
-                playerSelect = comboBox3;
-                tossupBox = textBox1;
-                durBox = textBox2;
-                listView = listView1;
+            if (addButton == addPlayerButton1) {
+                playerSelect = playerBox1;
+                tossupBox = tossupBox1;
+                durBox = durationBox1;
+                listView = playerListView1;
                 team = this.thisMatch.FirstTeam;
-                removeButton = button2;
+                removeButton = removePlayerButton1;
             }
             else {
-                playerSelect = comboBox4;
-                tossupBox = textBox6;
-                durBox = textBox4;
-                listView = listView2;
+                playerSelect = playerBox2;
+                tossupBox = tossupBox2;
+                durBox = durationBox2;
+                listView = playerListView2;
                 team = this.thisMatch.SecondTeam;
-                removeButton = button3;
+                removeButton = removePlayerButton2;
             }
 
             if (playerSelect.SelectedIndex == -1) {
@@ -211,49 +221,52 @@ namespace Scholar_Bowl
             }
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e) {
+        private void numericOnlyTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
             if (!char.IsControl(e.KeyChar) &&
                 !char.IsDigit(e.KeyChar)) {
                 e.Handled = true;
             }
-            if ((sender as TextBox).Size.Width == 53 &&
+            if ((sender as TextBox).Size.Width == 53 && // a really sneaky (and terrible) way to tell if it's a duration box
                 e.KeyChar == '.' &&
                 (sender as TextBox).Text.IndexOf('.') == -1) {
                 e.Handled = false;
             }
         }
 
-        private void button6_Click(object sender, EventArgs e) {
-            this.Close();
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
-        private void button5_Click(object sender, EventArgs e) {
-            if (textBox5.Text.Equals("")) {
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            if (scoreBox1.Text.Equals("")) {
                 toolTip1.ToolTipTitle = "No Final Score!";
-                toolTip1.Show("This team must have a final score.", textBox5);
-                textBox5.Focus();
+                toolTip1.Show("This team must have a final score.", scoreBox1);
+                scoreBox1.Focus();
                 return;
             }
-            if (textBox3.Text.Equals("")) {
+            if (scoreBox2.Text.Equals("")) {
                 toolTip1.ToolTipTitle = "No Final Score!";
-                toolTip1.Show("This team must have a final score.", textBox3);
-                textBox3.Focus();
+                toolTip1.Show("This team must have a final score.", scoreBox2);
+                scoreBox2.Focus();
                 return;
             }
-            decimal score1 = decimal.Parse(textBox5.Text);
-            decimal score2 = decimal.Parse(textBox3.Text);
+            decimal score1 = decimal.Parse(scoreBox1.Text);
+            decimal score2 = decimal.Parse(scoreBox2.Text);
             if (score1 == score2) {
                 MessageBox.Show(this, "This match indicates a tie!\r\nOne team must have a higher score than the other.",
                     this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBox5.Focus();
+                scoreBox1.Focus();
                 return;
             }
             MainForm.AllMatches.RemoveMatch(oldMatch);
             this.thisMatch.FirstTeam.Score = score1;
             this.thisMatch.SecondTeam.Score = score2;
-            this.thisMatch.FirstTeam.Team = this.thisMatch.FirstTeam.School.Teams[this.comboBox1.SelectedItem.ToString()];
-            this.thisMatch.SecondTeam.Team = this.thisMatch.SecondTeam.School.Teams[this.comboBox2.SelectedItem.ToString()];
-            this.thisMatch.Date = dateTimePicker1.Value;
+            this.thisMatch.FirstTeam.Team = this.thisMatch.FirstTeam.School.Teams[this.teamBox1.SelectedItem.ToString()];
+            this.thisMatch.SecondTeam.Team = this.thisMatch.SecondTeam.School.Teams[this.teamBox2.SelectedItem.ToString()];
+            this.thisMatch.Date = matchDatePicker.Value;
             MainForm.AllMatches.Add(thisMatch);
             this.Close();
         }
