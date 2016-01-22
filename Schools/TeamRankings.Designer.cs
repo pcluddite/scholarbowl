@@ -91,6 +91,7 @@
             this.teamListView.UseCompatibleStateImageBehavior = false;
             this.teamListView.View = System.Windows.Forms.View.Details;
             this.teamListView.SelectedIndexChanged += new System.EventHandler(this.teamListView_SelectedIndexChanged);
+            this.teamListView.DoubleClick += new System.EventHandler(this.teamListView_DoubleClick);
             // 
             // columnHeader3
             // 

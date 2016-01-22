@@ -123,6 +123,17 @@ namespace Scholar_Bowl
             removeButton.Enabled = (teamListView.SelectedItems.Count == 1);
         }
 
+        private void teamListView_DoubleClick(object sender, EventArgs e)
+        {
+            if (teamListView.SelectedItems.Count != 1)
+                return;
+
+            Team team = teams[teamListView.SelectedItems[0]];
+            EditSchool editor = new EditSchool(team.School);
+            editor.ShowDialog(this);
+            reload();
+        }
+
         private void removeButton_Click(object sender, EventArgs e)
         {
             if (teamListView.SelectedItems.Count == 1 && MessageBox.Show(this,

@@ -54,11 +54,11 @@
     <Compile Include="DataTypes\PlayerControl.cs" />
     <Compile Include="DataTypes\PlayerControlList.cs" />
     <Compile Include="DataTypes\Team.cs" />
-    <Compile Include="Schools\Edit School.cs">
+    <Compile Include="Schools\EditSchool.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Schools\Edit School.Designer.cs">
-      <DependentUpon>Edit School.cs</DependentUpon>
+    <Compile Include="Schools\EditSchool.Designer.cs">
+      <DependentUpon>EditSchool.cs</DependentUpon>
     </Compile>
     <Compile Include="ExcelGenerator.cs" />
     <Compile Include="Match\MatchEditor.cs">
@@ -170,8 +170,8 @@
     <EmbeddedResource Include="Players\ViewPlayer.resx">
       <DependentUpon>ViewPlayer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Schools\Edit School.resx">
-      <DependentUpon>Edit School.cs</DependentUpon>
+    <EmbeddedResource Include="Schools\EditSchool.resx">
+      <DependentUpon>EditSchool.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Schools\TeamRankings.resx">
       <DependentUpon>TeamRankings.cs</DependentUpon>
