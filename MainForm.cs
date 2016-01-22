@@ -337,7 +337,7 @@ namespace Scholar_Bowl
 
         private void viewRankingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TeamRankings tr = new TeamRankings(this);
+            TeamRankings tr = new TeamRankings();
             tr.ShowDialog(this);
         }
 

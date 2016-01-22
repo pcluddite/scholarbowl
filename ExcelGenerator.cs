@@ -137,10 +137,8 @@ namespace Scholar_Bowl
             xlApp.Visible = true;
         }
 
-        public static void AllTeams(object o_team_list)
+        public static void AllTeams(List<Team> teams)
         {
-            List<Team> teams = (List<Team>)o_team_list;
-
             Application xlApp = new Application();
 
             Workbook wb = xlApp.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
