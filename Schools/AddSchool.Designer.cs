@@ -25,13 +25,13 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.schoolBox = new System.Windows.Forms.TextBox();
+            this.teamListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button3 = new System.Windows.Forms.Button();
+            this.saveFinishButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -43,49 +43,49 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "School Name:";
             // 
-            // textBox1
+            // schoolBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(220, 20);
-            this.textBox1.TabIndex = 1;
+            this.schoolBox.Location = new System.Drawing.Point(12, 25);
+            this.schoolBox.Name = "schoolBox";
+            this.schoolBox.Size = new System.Drawing.Size(220, 20);
+            this.schoolBox.TabIndex = 1;
             // 
-            // listView1
+            // teamListView
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.teamListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
-            this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(12, 51);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(220, 194);
-            this.listView1.TabIndex = 3;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.teamListView.FullRowSelect = true;
+            this.teamListView.Location = new System.Drawing.Point(12, 51);
+            this.teamListView.Name = "teamListView";
+            this.teamListView.Size = new System.Drawing.Size(220, 194);
+            this.teamListView.TabIndex = 3;
+            this.teamListView.UseCompatibleStateImageBehavior = false;
+            this.teamListView.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Teams";
             this.columnHeader1.Width = 204;
             // 
-            // button1
+            // addButton
             // 
-            this.button1.Location = new System.Drawing.Point(12, 251);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "&Add Team";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.addButton.Location = new System.Drawing.Point(12, 251);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(71, 23);
+            this.addButton.TabIndex = 4;
+            this.addButton.Text = "&Add Team";
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
-            // button2
+            // saveButton
             // 
-            this.button2.Location = new System.Drawing.Point(186, 251);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(46, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "&Save";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.saveButton.Location = new System.Drawing.Point(186, 251);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(46, 23);
+            this.saveButton.TabIndex = 5;
+            this.saveButton.Text = "&Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // toolTip1
             // 
@@ -93,27 +93,27 @@
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Error;
             this.toolTip1.ToolTipTitle = "School Already Exists!";
             // 
-            // button3
+            // saveFinishButton
             // 
-            this.button3.Location = new System.Drawing.Point(89, 251);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(91, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Save and &Finish";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button2_Click);
+            this.saveFinishButton.Location = new System.Drawing.Point(89, 251);
+            this.saveFinishButton.Name = "saveFinishButton";
+            this.saveFinishButton.Size = new System.Drawing.Size(91, 23);
+            this.saveFinishButton.TabIndex = 6;
+            this.saveFinishButton.Text = "Save and &Finish";
+            this.saveFinishButton.UseVisualStyleBackColor = true;
+            this.saveFinishButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // AddSchool
             // 
-            this.AcceptButton = this.button2;
+            this.AcceptButton = this.saveButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(244, 285);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.saveFinishButton);
+            this.Controls.Add(this.saveButton);
+            this.Controls.Add(this.addButton);
+            this.Controls.Add(this.teamListView);
+            this.Controls.Add(this.schoolBox);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -130,12 +130,12 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox schoolBox;
         private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        public System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button saveButton;
+        public System.Windows.Forms.ListView teamListView;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button saveFinishButton;
     }
 }
