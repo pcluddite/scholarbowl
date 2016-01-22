@@ -305,7 +305,7 @@ namespace Scholar_Bowl
 
         private void setupNewSchoolToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddSchool addschool = new AddSchool(this);
+            AddSchool addschool = new AddSchool();
             addschool.ShowDialog(this);
             reload();
         }
