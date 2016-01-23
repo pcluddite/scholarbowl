@@ -25,14 +25,14 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.playerBox = new System.Windows.Forms.TextBox();
+            this.schoolBox = new System.Windows.Forms.ComboBox();
+            this.teamBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.finishButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label3 = new System.Windows.Forms.Label();
+            this.infoLabel = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
@@ -45,31 +45,31 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Player Name:";
             // 
-            // textBox1
+            // playerBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(112, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(264, 20);
-            this.textBox1.TabIndex = 1;
+            this.playerBox.Location = new System.Drawing.Point(112, 12);
+            this.playerBox.Name = "playerBox";
+            this.playerBox.Size = new System.Drawing.Size(264, 20);
+            this.playerBox.TabIndex = 1;
             // 
-            // comboBox1
+            // schoolBox
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(112, 38);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(163, 21);
-            this.comboBox1.TabIndex = 2;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.schoolBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.schoolBox.FormattingEnabled = true;
+            this.schoolBox.Location = new System.Drawing.Point(112, 38);
+            this.schoolBox.Name = "schoolBox";
+            this.schoolBox.Size = new System.Drawing.Size(163, 21);
+            this.schoolBox.TabIndex = 2;
+            this.schoolBox.SelectedIndexChanged += new System.EventHandler(this.schoolBox_SelectedIndexChanged);
             // 
-            // comboBox2
+            // teamBox
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(281, 38);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(95, 21);
-            this.comboBox2.TabIndex = 3;
+            this.teamBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.teamBox.FormattingEnabled = true;
+            this.teamBox.Location = new System.Drawing.Point(281, 38);
+            this.teamBox.Name = "teamBox";
+            this.teamBox.Size = new System.Drawing.Size(95, 21);
+            this.teamBox.TabIndex = 3;
             // 
             // label2
             // 
@@ -80,45 +80,45 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "School and Team:";
             // 
-            // button1
+            // saveButton
             // 
-            this.button1.Location = new System.Drawing.Point(301, 65);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "&Save";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.saveButton.Location = new System.Drawing.Point(301, 65);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 5;
+            this.saveButton.Text = "&Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // button2
+            // finishButton
             // 
-            this.button2.Location = new System.Drawing.Point(198, 65);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(97, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Save and &Finish";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button1_Click);
+            this.finishButton.Location = new System.Drawing.Point(198, 65);
+            this.finishButton.Name = "finishButton";
+            this.finishButton.Size = new System.Drawing.Size(97, 23);
+            this.finishButton.TabIndex = 6;
+            this.finishButton.Text = "Save and &Finish";
+            this.finishButton.UseVisualStyleBackColor = true;
+            this.finishButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // toolTip1
             // 
             this.toolTip1.IsBalloon = true;
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Error;
             // 
-            // label3
+            // infoLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.Info;
-            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label3.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(39, 62);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(155, 32);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "The player has been added\r\nsuccessfully";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label3.Visible = false;
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.infoLabel.AutoSize = true;
+            this.infoLabel.BackColor = System.Drawing.SystemColors.Info;
+            this.infoLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.infoLabel.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.infoLabel.Location = new System.Drawing.Point(39, 62);
+            this.infoLabel.Name = "infoLabel";
+            this.infoLabel.Size = new System.Drawing.Size(155, 32);
+            this.infoLabel.TabIndex = 7;
+            this.infoLabel.Text = "The player has been added\r\nsuccessfully";
+            this.infoLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.infoLabel.Visible = false;
+            this.infoLabel.Click += new System.EventHandler(this.infoLabel_Click);
             // 
             // timer1
             // 
@@ -127,17 +127,17 @@
             // 
             // AddPlayer
             // 
-            this.AcceptButton = this.button1;
+            this.AcceptButton = this.saveButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(386, 100);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.infoLabel);
+            this.Controls.Add(this.finishButton);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.teamBox);
+            this.Controls.Add(this.schoolBox);
+            this.Controls.Add(this.playerBox);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -155,14 +155,14 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox playerBox;
+        private System.Windows.Forms.ComboBox schoolBox;
+        private System.Windows.Forms.ComboBox teamBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button finishButton;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.Timer timer1;
     }
 }

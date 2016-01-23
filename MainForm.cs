@@ -299,7 +299,7 @@ namespace Scholar_Bowl
 
         private void setupNewPlayerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddPlayer ap = new AddPlayer(this);
+            AddPlayer ap = new AddPlayer();
             ap.ShowDialog(this);
         }
 
