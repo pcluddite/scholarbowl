@@ -80,13 +80,7 @@ namespace Scholar_Bowl
         /// <param name="t">the team</param>
         /// <returns>true if the team played, false otherwise</returns>
         public bool DidPlay(Team t) {
-            if (t.Name.Equals(FirstTeam.Name)) {
-                return true;
-            }
-            else if (t.Name.Equals(SecondTeam.Name)) {
-                return true;
-            }
-            return false;
+            return (t == FirstTeam.Team) || (t == SecondTeam.Team);
         }
 
         /// <summary>

@@ -8,11 +8,13 @@ namespace Scholar_Bowl
     /// <summary>
     /// Represents a list of matches
     /// </summary>
-    public class MatchList : ICollection<Match> {
+    public class MatchList : ICollection<Match>
+    {
 
         private List<Match> matches;
 
-        public MatchList(List<Match> matches) {
+        public MatchList(List<Match> matches)
+        {
             this.matches = matches;
         }
 
@@ -21,7 +23,8 @@ namespace Scholar_Bowl
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public IEnumerable<Match> GetOnDate(DateTime dt) {
+        public IEnumerable<Match> GetOnDate(DateTime dt)
+        {
             foreach (Match m in matches) {
                 if (m.Date.Date == dt.Date.Date) {
                     yield return m;
@@ -35,7 +38,8 @@ namespace Scholar_Bowl
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public IEnumerable<Match> GetMatchesPlayed(Player player) {
+        public IEnumerable<Match> GetMatchesPlayed(Player player)
+        {
 
             foreach (Match match in this.matches) {
                 if (match.DidPlay(player)) {
@@ -64,9 +68,10 @@ namespace Scholar_Bowl
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public Dictionary<DateTime, decimal[]> GetForEachDate(Player player) {
+        public Dictionary<DateTime, decimal[]> GetForEachDate(Player player)
+        {
             Dictionary<DateTime, decimal[]> ret = new Dictionary<DateTime, decimal[]>();
-            List<Match> matchesPlayed = this.GetMatchesPlayed(player).ToList();
+            List<Match> matchesPlayed = GetMatchesPlayed(player).ToList();
             matchesPlayed.Sort((a, b) => a.Date.CompareTo(b.Date));
             foreach (Match match in matchesPlayed) {
                 DateTime current = match.Date.Date;
@@ -81,12 +86,42 @@ namespace Scholar_Bowl
         }
 
         /// <summary>
+        /// Gets the wins and losses for each date
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public Dictionary<DateTime, decimal[]> GetForEachDate(Team team)
+        {
+            Dictionary<DateTime, decimal[]> ret = new Dictionary<DateTime, decimal[]>();
+            List<Match> matchesPlayed = GetMatchesPlayed(team).ToList();
+            matchesPlayed.Sort((a, b) => a.Date.CompareTo(b.Date));
+            foreach (Match match in matchesPlayed) {
+                DateTime current = match.Date.Date;
+                if (!ret.ContainsKey(current)) {
+                    ret.Add(current, new decimal[] { 0, 0 });
+                }
+                if (match.Winner == null) {
+
+                }
+                if (match.Winner.Team == team) {
+                    ret[current][0]++;
+                }
+                else {
+                    ret[current][1]++;
+                }
+            }
+
+            return ret;
+        }
+
+        /// <summary>
         /// Gets the number of tossups a player received on a given date
         /// </summary>
         /// <param name="dt"></param>
         /// <param name="p"></param>
         /// <returns></returns>
-        public decimal GetTossupsOnDate(DateTime dt, Player p) {
+        public decimal GetTossupsOnDate(DateTime dt, Player p)
+        {
             decimal ret = 0;
             foreach (Match m in GetOnDate(dt)) {
                 ret += m.GetTossups(p);
@@ -99,7 +134,8 @@ namespace Scholar_Bowl
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public decimal GetTotalTossups(Player p) {
+        public decimal GetTotalTossups(Player p)
+        {
             decimal ret = 0;
             foreach (Match m in matches) {
                 ret += m.GetTossups(p);
@@ -112,7 +148,8 @@ namespace Scholar_Bowl
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public decimal GetGamesPlayed(Player p) {
+        public decimal GetGamesPlayed(Player p)
+        {
             decimal ret = 0;
             foreach (Match m in matches) {
                 ret += m.GetDuration(p);
@@ -187,7 +224,8 @@ namespace Scholar_Bowl
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>
-        public decimal GetWins(Team t) {
+        public decimal GetWins(Team t)
+        {
             decimal ret = 0;
             foreach (Match m in matches) {
                 if (m.Winner.School.Name.Equals(t.School.Name) &&
@@ -203,7 +241,8 @@ namespace Scholar_Bowl
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>
-        public decimal GetLosses(Team t) {
+        public decimal GetLosses(Team t)
+        {
             decimal ret = 0;
             foreach (Match m in matches) {
                 if (m.Loser.School.Name.Equals(t.School.Name) &&
@@ -228,11 +267,13 @@ namespace Scholar_Bowl
             }
         }
 
-        public IEnumerator<Match> GetEnumerator() {
+        public IEnumerator<Match> GetEnumerator()
+        {
             return matches.GetEnumerator();
         }
 
-        public void Sort(Comparison<Match> comparator) {
+        public void Sort(Comparison<Match> comparator)
+        {
             matches.Sort(comparator);
         }
 
@@ -240,7 +281,8 @@ namespace Scholar_Bowl
         /// Gets the date of the first match
         /// </summary>
         /// <returns></returns>
-        public DateTime GetFirstDate() {
+        public DateTime GetFirstDate()
+        {
             if (matches.Count > 0) {
                 return matches[0].Date;
             }
@@ -253,7 +295,8 @@ namespace Scholar_Bowl
         /// Gets the date of the last match
         /// </summary>
         /// <returns></returns>
-        public DateTime GetLastDate() {
+        public DateTime GetLastDate()
+        {
             if (matches.Count > 0) {
                 return matches[matches.Count - 1].Date;
             }
@@ -266,7 +309,8 @@ namespace Scholar_Bowl
         /// Removes a match from the list
         /// </summary>
         /// <param name="m"></param>
-        public void RemoveMatch(Match m) {
+        public void RemoveMatch(Match m)
+        {
             List<Match> newList = new List<Match>();
             foreach (Match match in this) {
                 if (match.ID != m.ID) {
@@ -278,7 +322,8 @@ namespace Scholar_Bowl
 
         static Random rand = new Random();
 
-        public static MatchList FromXml(XmlDocument doc, Dictionary<string, School> schools, Dictionary<string, Player> players) {
+        public static MatchList FromXml(XmlDocument doc, Dictionary<string, School> schools, Dictionary<string, Player> players)
+        {
             List<Match> matches = new List<Match>();
             XmlNode nMatches = doc.SelectSingleNode("scholarbowl/matches");
             foreach (XmlNode nMatch in nMatches) {
@@ -313,14 +358,16 @@ namespace Scholar_Bowl
         /// <param name="team2"></param>
         /// <param name="matches"></param>
         /// <returns></returns>
-        static List<Match> AddMatch(DateTime dt, MatchTeam team1, MatchTeam team2, List<Match> matches) {
+        static List<Match> AddMatch(DateTime dt, MatchTeam team1, MatchTeam team2, List<Match> matches)
+        {
             int id;
             while (MatchExists(id = rand.Next(), matches)) ;
             matches.Add(new Match(id, dt, team1, team2));
             return matches;
         }
 
-        public static bool MatchExists(int matchID, List<Match> matches) {
+        public static bool MatchExists(int matchID, List<Match> matches)
+        {
             foreach (Match m in matches) {
                 if (m.ID == matchID) {
                     return true;
@@ -329,13 +376,15 @@ namespace Scholar_Bowl
             return false;
         }
 
-        public void AddMatch(DateTime dt, MatchTeam team1, MatchTeam team2) {
+        public void AddMatch(DateTime dt, MatchTeam team1, MatchTeam team2)
+        {
             int id;
             while (this.MatchExists(id = rand.Next())) ;
             matches.Add(new Match(id, dt, team1, team2));
         }
 
-        public bool MatchExists(int matchID) {
+        public bool MatchExists(int matchID)
+        {
             foreach (Match m in matches) {
                 if (m.ID == matchID) {
                     return true;

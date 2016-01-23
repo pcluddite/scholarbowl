@@ -35,6 +35,8 @@
             this.addButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.excelButton = new System.Windows.Forms.Button();
+            this.excelWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // label1
@@ -48,6 +50,8 @@
             // 
             // schoolBox
             // 
+            this.schoolBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.schoolBox.Location = new System.Drawing.Point(92, 12);
             this.schoolBox.Name = "schoolBox";
             this.schoolBox.Size = new System.Drawing.Size(199, 20);
@@ -55,6 +59,9 @@
             // 
             // teamListView
             // 
+            this.teamListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.teamListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -62,11 +69,10 @@
             this.columnHeader4});
             this.teamListView.FullRowSelect = true;
             this.teamListView.GridLines = true;
-            this.teamListView.LabelEdit = true;
             this.teamListView.Location = new System.Drawing.Point(15, 38);
             this.teamListView.Name = "teamListView";
-            this.teamListView.Size = new System.Drawing.Size(341, 189);
-            this.teamListView.TabIndex = 2;
+            this.teamListView.Size = new System.Drawing.Size(357, 188);
+            this.teamListView.TabIndex = 3;
             this.teamListView.UseCompatibleStateImageBehavior = false;
             this.teamListView.View = System.Windows.Forms.View.Details;
             this.teamListView.SelectedIndexChanged += new System.EventHandler(this.teamListView_SelectedIndexChanged);
@@ -91,31 +97,34 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(281, 233);
+            this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveButton.Location = new System.Drawing.Point(297, 11);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 4;
-            this.saveButton.Text = "&Done";
+            this.saveButton.TabIndex = 2;
+            this.saveButton.Text = "&Change";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(15, 233);
+            this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.addButton.Location = new System.Drawing.Point(15, 232);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(75, 23);
-            this.addButton.TabIndex = 5;
+            this.addButton.TabIndex = 4;
             this.addButton.Text = "&Add Team";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // removeButton
             // 
+            this.removeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.removeButton.Enabled = false;
-            this.removeButton.Location = new System.Drawing.Point(96, 233);
+            this.removeButton.Location = new System.Drawing.Point(96, 232);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(98, 23);
-            this.removeButton.TabIndex = 6;
+            this.removeButton.TabIndex = 5;
             this.removeButton.Text = "&Remove Team";
             this.removeButton.UseVisualStyleBackColor = true;
             this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
@@ -124,11 +133,29 @@
             // 
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Error;
             // 
+            // excelButton
+            // 
+            this.excelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.excelButton.Enabled = false;
+            this.excelButton.Location = new System.Drawing.Point(274, 232);
+            this.excelButton.Name = "excelButton";
+            this.excelButton.Size = new System.Drawing.Size(98, 23);
+            this.excelButton.TabIndex = 6;
+            this.excelButton.Text = "Create &Report";
+            this.excelButton.UseVisualStyleBackColor = true;
+            this.excelButton.Click += new System.EventHandler(this.excelButton_Click);
+            // 
+            // excelWorker
+            // 
+            this.excelWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.excelWorker_DoWork);
+            this.excelWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.excelWorker_RunWorkerCompleted);
+            // 
             // EditSchool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(367, 268);
+            this.ClientSize = new System.Drawing.Size(384, 266);
+            this.Controls.Add(this.excelButton);
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.saveButton);
@@ -136,7 +163,7 @@
             this.Controls.Add(this.schoolBox);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(400, 305);
             this.Name = "EditSchool";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -161,5 +188,7 @@
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button excelButton;
+        private System.ComponentModel.BackgroundWorker excelWorker;
     }
 }

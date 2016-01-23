@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace Scholar_Bowl
 {
@@ -34,7 +35,7 @@ namespace Scholar_Bowl
                 teamItem.SubItems.Add("--");
             }
             else {
-                teamItem.SubItems.Add(avg.ToString("0.##") + '%');
+                teamItem.SubItems.Add((avg * 100).ToString("0.##") + '%');
             }
             teamListView.Items.Add(teamItem);
             teams.Add(teamItem, t);
@@ -42,11 +43,7 @@ namespace Scholar_Bowl
 
         private void teamListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (teamListView.SelectedItems.Count != 1) {
-                removeButton.Enabled = false;
-                return;
-            }
-            removeButton.Enabled = true;
+            removeButton.Enabled = excelButton.Enabled = (teamListView.SelectedItems.Count == 1);
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -78,8 +75,25 @@ namespace Scholar_Bowl
                 MainForm.Schools.Remove(school.Name);
                 school.Name = schoolBox.Text;
                 MainForm.Schools.Add(school.Name, school);
-                Close();
             }
+        }
+
+        private void excelButton_Click(object sender, EventArgs e)
+        {
+            label1.Enabled = schoolBox.Enabled = saveButton.Enabled = teamListView.Enabled =
+                addButton.Enabled = removeButton.Enabled = excelButton.Enabled = false;
+            excelWorker.RunWorkerAsync(teams[teamListView.SelectedItems[0]]);
+        }
+
+        private void excelWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ExcelGenerator.ThisTeam((Team)e.Argument);
+        }
+
+        private void excelWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            label1.Enabled = schoolBox.Enabled = saveButton.Enabled = teamListView.Enabled =
+                addButton.Enabled = removeButton.Enabled = excelButton.Enabled = true;
         }
     }
 }

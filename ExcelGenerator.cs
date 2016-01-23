@@ -194,5 +194,81 @@ namespace Scholar_Bowl
 
             xlApp.Visible = true;
         }
+
+        public static void ThisTeam(Team t)
+        {
+            Application xlApp = new Application();
+
+            Workbook wb = xlApp.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
+            Worksheet ws = (Worksheet)wb.Worksheets[1];
+            ws.Name = t.School.Name + " - " + t.Name;
+
+            Range header = ws.get_Range("A1", "E1");
+            header.Font.Bold = true;
+            header.Borders[XlBordersIndex.xlEdgeBottom].Color = System.Drawing.Color.Black.ToArgb();
+            ws.Cells[1, 1] = "Date";
+            ws.Cells[1, 2] = "Wins";
+            ws.Cells[1, 3] = "Losses";
+            ws.Cells[1, 4] = "% Win";
+            ws.Cells[1, 5] = "% Loss";
+
+            int r = 2;
+
+            foreach (var v in MainForm.AllMatches.GetForEachDate(t)) {
+                ws.Cells[r, 1] = v.Key;
+                ws.Cells[r, 2] = v.Value[0];
+                ws.Cells[r, 3] = v.Value[1];
+                if ((v.Value[0] + v.Value[1]) != 0) {
+                    ws.Cells[r, 4] = "=B" + r + "/(B" + r + "+C" + r + ")";
+                    ws.Cells[r, 5] = "=C" + r + "/(B" + r + "+C" + r + ")";
+                }
+                r++;
+            }
+
+            int last = r;
+            r--;
+
+            Range percents = ws.get_Range("D2", "E" + last);
+            percents.NumberFormat = "###,##.00%";
+
+            Range total = ws.get_Range("A" + last, "E" + last);
+            total.Borders[XlBordersIndex.xlEdgeTop].Color = System.Drawing.Color.Black.ToArgb();
+            total.Font.Bold = true;
+
+            ws.Cells[last, 1] = "Total";
+            ws.Cells[last, 2] = "=SUM(B2:B" + r + ")";
+            ws.Cells[last, 3] = "=SUM(C2:C" + r + ")";
+            ws.Cells[last, 4] = "=B" + last + "/(B" + last + "+C" + last + ")";
+            ws.Cells[last, 5] = "=C" + last + "/(B" + last + "+C" + last + ")";
+
+            ((Range)ws.Columns[1]).EntireColumn.ColumnWidth = 11;
+            ((Range)ws.Columns[2]).EntireColumn.ColumnWidth = 9;
+            ChartObjects chartObjs = (ChartObjects)ws.ChartObjects();
+            ChartObject chartObj = chartObjs.Add(470, 20, 350, 300);
+            Chart xlChart = chartObj.Chart;
+            xlChart.ChartType = XlChartType.xlLine;
+
+            xlChart.HasTitle = true;
+            xlChart.ChartTitle.Text = "Wins/Losses per Day";
+
+            Axis a = (Axis)xlChart.Axes(
+                XlAxisType.xlValue, XlAxisGroup.xlPrimary);
+            a.HasTitle = true;
+            a.AxisTitle.Text = "Percentage";
+
+            a = (Axis)xlChart.Axes(
+                XlAxisType.xlCategory, XlAxisGroup.xlPrimary);
+            a.HasTitle = true;
+            a.AxisTitle.Text = "Date";
+
+            SeriesCollection seriesCollection = (SeriesCollection)xlChart.SeriesCollection();
+
+            Series series2 = seriesCollection.NewSeries();
+            series2.Name = "Wins";
+            series2.XValues = ws.Range["A2", "A" + r];
+            series2.Values = ws.Range["D2", "D" + r];
+            
+            xlApp.Visible = true;
+        }
     }
 }
