@@ -10,7 +10,6 @@ namespace Scholar_Bowl
     /// </summary>
     public class MatchList : ICollection<Match>
     {
-
         private List<Match> matches;
 
         public MatchList(List<Match> matches)
@@ -40,7 +39,6 @@ namespace Scholar_Bowl
         /// <returns></returns>
         public IEnumerable<Match> GetMatchesPlayed(Player player)
         {
-
             foreach (Match match in this.matches) {
                 if (match.DidPlay(player)) {
                     yield return match;
@@ -287,7 +285,7 @@ namespace Scholar_Bowl
                 return matches[0].Date;
             }
             else {
-                return DateTime.Now;
+                return default(DateTime);
             }
         }
 
@@ -301,7 +299,7 @@ namespace Scholar_Bowl
                 return matches[matches.Count - 1].Date;
             }
             else {
-                return DateTime.Now;
+                return default(DateTime);
             }
         }
 
